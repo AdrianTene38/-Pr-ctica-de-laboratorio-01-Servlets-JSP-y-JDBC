@@ -9,13 +9,36 @@ public class Telefono implements Serializable {
 	private String numero;
 	private String tipo;
 	private String operadora;
-	
+	private String cedula;
+	public Telefono(int codigo, String numero, String tipo, String operadora, String cedula) {
+		super();
+		this.codigo = codigo;
+		this.numero = numero;
+		this.tipo = tipo;
+		this.operadora = operadora;
+		this.cedula = cedula;
+	}
+
+
+
 	public Telefono(){
 		
 	}
 	
 	
 	
+	public String getCedula() {
+		return cedula;
+	}
+
+
+
+	public void setCedula(String cedula) {
+		this.cedula = cedula;
+	}
+
+
+
 	public int getCodigo() {
 		return codigo;
 	}

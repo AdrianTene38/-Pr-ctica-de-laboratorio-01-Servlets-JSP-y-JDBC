@@ -10,11 +10,27 @@ public class Persona implements Serializable {
 	private String apellido;
 	private String correo;
 	private String contra;
-	public Persona() {
-		// obligatorio
+	private static Persona instance;
+	
+	public Persona(String cedula, String nombre, String apellido, String correo, String contra) {
+		super();
+		this.cedula = cedula;
+		this.nombre = nombre;
+		this.apellido = apellido;
+		this.correo = correo;
+		this.contra = contra;
 	}
+
+
 	
-	
+
+	public Persona() {
+		// TODO Auto-generated constructor stub
+	}
+
+
+
+
 	public String getCedula() {
 		return cedula;
 	}
@@ -48,4 +64,9 @@ public class Persona implements Serializable {
 	public static long getSerialversionuid() {
 		return serialVersionUID;
 	}
+	  public static Persona getInstance() {
+	        if (instance == null)
+	            instance = new Persona();
+	        return instance;
+	    }
 }
