@@ -61,4 +61,3 @@ public class UsuarioDao {
 	      return cadena;
 	   }
 }
-

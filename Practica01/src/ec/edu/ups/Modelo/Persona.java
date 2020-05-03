@@ -11,7 +11,7 @@ public class Persona implements Serializable {
 	private String correo;
 	private String contra;
 	private static Persona instance;
-	
+
 	public Persona(String cedula, String nombre, String apellido, String correo, String contra) {
 		super();
 		this.cedula = cedula;
@@ -22,7 +22,7 @@ public class Persona implements Serializable {
 	}
 
 
-	
+
 
 	public Persona() {
 		// TODO Auto-generated constructor stub
@@ -64,9 +64,9 @@ public class Persona implements Serializable {
 	public static long getSerialversionuid() {
 		return serialVersionUID;
 	}
-	  public static Persona getInstance() {
-	        if (instance == null)
-	            instance = new Persona();
-	        return instance;
-	    }
+	public static Persona getInstance() {
+		if (instance == null)
+			instance = new Persona();
+		return instance;
+	}
 }

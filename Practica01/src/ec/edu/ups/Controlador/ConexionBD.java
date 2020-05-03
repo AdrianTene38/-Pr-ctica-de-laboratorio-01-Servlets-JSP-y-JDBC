@@ -8,6 +8,7 @@ import java.sql.SQLException;
 import com.mysql.cj.xdevapi.Statement;
 
 public class ConexionBD {
+	private Connection jdbcConnection;
 	public static Connection getConnection() {
 		String url = "jdbc:mysql://localhost:3306/agenda_telefonica";
 		String user = "root";
@@ -16,7 +17,7 @@ public class ConexionBD {
 
 			Class.forName("com.mysql.cj.jdbc.Driver");  
 			Connection con = DriverManager.getConnection(url, user, pass);
-System.out.println("conecta");
+			System.out.println("conecta");
 			return con;
 
 		} catch (Exception ex) {
@@ -34,15 +35,20 @@ System.out.println("conecta");
 		} catch (Exception ex) {
 		}
 	}
-	  public ResultSet consultar(String sql) {
-	        ResultSet resultado;
-	        try {
-	            java.sql.Statement sentencia = getConnection().createStatement(ResultSet.TYPE_FORWARD_ONLY, ResultSet.CONCUR_READ_ONLY);
-	            resultado = sentencia.executeQuery(sql);
-	        } catch (SQLException e) {
-	            e.printStackTrace();
-	            return null;
-	        }        return resultado;
-	    }
-	
+	public ResultSet consultar(String sql) {
+		ResultSet resultado;
+		try {
+			java.sql.Statement sentencia = getConnection().createStatement(ResultSet.TYPE_FORWARD_ONLY, ResultSet.CONCUR_READ_ONLY);
+			resultado = sentencia.executeQuery(sql);
+		} catch (SQLException e) {
+			e.printStackTrace();
+			return null;
+		}        return resultado;
+	}
+
+
+	public Connection getJdbcConnection() {
+		return jdbcConnection;
+	}  
+
 }

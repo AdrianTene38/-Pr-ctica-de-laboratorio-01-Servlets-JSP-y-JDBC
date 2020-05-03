@@ -86,6 +86,8 @@ public class ControlaUsuario extends HttpServlet {
 		if(usuario.login(user, pass)!="") {
 			out.println("<hl>gracias por acceder al servidor</hl>") ; 
 			out.println("<a href='Telefono.jsp'>RegistrarTelefono</a>");	
+			out.println("<a href='ControlaTelefono?action=mostrar'>ListaTelefono</a>");	
+			
 			Persona usuarioactual = Persona.getInstance();
 			System.out.println("la webada que hiciste adrian:  "+ usuarioactual.getCedula());
 					
@@ -94,7 +96,6 @@ public class ControlaUsuario extends HttpServlet {
 		}
 		//adas asdas	
 
-	
 	}
 	
 	
