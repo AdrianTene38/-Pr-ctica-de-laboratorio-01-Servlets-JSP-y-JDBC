@@ -19,21 +19,30 @@
 			<td>NUMERO</td>
 			<td>TIPO</td>
 			<td>OPERADORA</td>
-			 <td colspan=2>ACCIONES</td>
+			<td colspan=2>ACCIONES</td>
 		</tr>
-		<c:forEach var="telefono" items="${lista}">
+		<c:forEach var="telefono"  items="${lista}">
 			<tr>
 				<td><c:out value="${telefono.codigo}" /></td>
 				<td><c:out value="${telefono.numero}" /></td>
 				<td><c:out value="${telefono.tipo}" /></td>
 				<td><c:out value="${telefono.operadora}" /></td>
-				<td><a href="ControlaTelefono?action=editapr&id=<c:out value="${telefono.codigo}" />">Editar</a></td>
-				<td><a href="ControlaTelefono?action=Eliminar&id=<c:out value="${telefono.codigo}" />">Eliminar</a> </td>	
+				<td><a
+					href="ControlaTelefono?action=editapr&id=<c:out value="${telefono.codigo}" />">Editar</a></td>
+				<td><a
+					href="ControlaTelefono?action=Eliminar&id=<c:out value="${telefono.codigo}" />">Eliminar</a>
+				</td>
 			</tr>
 		</c:forEach>
 	</table>
-	<br>
+	<br>'
+	<form>
+		<table border="0" align="center">
+			<tr>
+				<td> <a href='Buscar.jsp'>RegistrarTelefono</a></td>
+			</tr>
 
-	<table border="0" align="center">
+		</table>
+	</form>
 </body>
 </html>

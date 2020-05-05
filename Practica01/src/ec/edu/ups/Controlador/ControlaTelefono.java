@@ -72,6 +72,15 @@ public class ControlaTelefono extends HttpServlet {
 				System.out.println("ksjdfsjkdfkjsdfjkds");
 				editarp(request, response);
 				break;
+			case "Buscar":
+				System.out.println("asd");
+				mostrar1(request, response);
+				break;
+				
+			case "BuscaCedula":
+				System.out.println("asd");
+				mostrar2(request, response);
+				break;
 			default:
 				break;
 			}
@@ -151,8 +160,8 @@ public class ControlaTelefono extends HttpServlet {
 	private void editar(HttpServletRequest request, HttpServletResponse response) throws Exception{
 		Telefono te= Telefono.getInstance();
 		
-		String numero=request.getParameter("codigom");
-		int numEntero = Integer.parseInt(numero);
+		String s=request.getParameter("codigom");
+		int numEntero = Integer.parseInt(s);
 		System.out.println("mira cabeza   "+ te.getCodigo());//te.setCodigo(numEntero);
 		
 		
@@ -162,12 +171,53 @@ public class ControlaTelefono extends HttpServlet {
 		//telefono.actualizar(tele);
 		//RequestDispatcher dispatcher = request.getRequestDispatcher("Editar.jsp");
 		//dispatcher.forward(request, response);
-		Telefono articulo = new Telefono(numEntero, request.getParameter("numero"), request.getParameter("tipo"), request.getParameter("operadora"));
+		Telefono articulo = new Telefono( numEntero, request.getParameter("numero"), request.getParameter("tipo"), request.getParameter("operadora"));
 		telefono.actualizar(articulo, te.getCodigo());
 		RequestDispatcher dispatcher = request.getRequestDispatcher("Editar.jsp");
 		dispatcher.forward(request,
 				response);
 	}
+	
+	private void mostrar1(HttpServletRequest request, HttpServletResponse response) throws SQLException, IOException , ServletException{
+		javax.servlet.RequestDispatcher dispatcher = request.getRequestDispatcher("Buscar.jsp");
+		TelefonoDAO  telefono=new TelefonoDAO();
+		Telefono t = Telefono.getInstance();
+		String n=request.getParameter("codiguito");
+		int numEntero = Integer.parseInt(n);
+		System.out.println("mira mmvrga"+numEntero);
+		ArrayList<Telefono>prueba= telefono.Busca(numEntero);
+		System.out.println("tama;o222"+ prueba.size());
+		System.out.println();
+		request.setAttribute("lista", prueba);
+		dispatcher.forward(request, response);
+
+	}
+	
+	
+	
+	
+	private void mostrar2(HttpServletRequest request, HttpServletResponse response) throws SQLException, IOException , ServletException{
+		javax.servlet.RequestDispatcher dispatcher = request.getRequestDispatcher("Lista_Informacion.jsp");
+		TelefonoDAO  telefono=new TelefonoDAO();
+		Telefono t = Telefono.getInstance();
+		String n=request.getParameter("cedulita");
+		String d =request.getParameter("numero");
+		System.out.println("mmvrga el gabriel"+d);
+		ArrayList<Telefono>prueba= telefono.BuscaTel(n);
+		ArrayList<Persona>prueba1= telefono.BuscaUsu(n);
+		System.out.println("tama;o222"+ prueba.size());
+		System.out.println();
+		request.setAttribute("lista1", prueba1);
+		request.setAttribute("lista", prueba);
+		
+		dispatcher.forward(request, response);
+
+	}
+	
+	
+	
+	
+	
 	
 	/**
 	 * 

@@ -87,7 +87,7 @@ public class ControlaUsuario extends HttpServlet {
 			out.println("<hl>gracias por acceder al servidor</hl>") ; 
 			out.println("<a href='Telefono.jsp'>RegistrarTelefono</a>");	
 			out.println("<a href='ControlaTelefono?action=mostrar'>ListaTelefono</a>");	
-			
+			out.println("<a href='Lista_Informacion.jsp'>ListaTelefono-Usuario</a>");	
 			Persona usuarioactual = Persona.getInstance();
 			System.out.println("la webada que hiciste adrian:  "+ usuarioactual.getCedula());
 					

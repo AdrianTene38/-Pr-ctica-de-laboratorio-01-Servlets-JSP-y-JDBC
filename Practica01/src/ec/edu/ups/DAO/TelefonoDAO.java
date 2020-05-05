@@ -117,36 +117,33 @@ public class TelefonoDAO {
 		System.out.println("ven por qui por favor");
 		try {
 			con = ConexionBD.getConnection();
-			
+
 			PreparedStatement ps= con.prepareStatement("SELECT tel_codigo,tel_numero,tel_tipo,tel_operadora FROM telefono WHERE tel_codigo = '"  + id + "'"   );	
 			ResultSet res =ps.executeQuery();
 			if (res.next()) {
 				telactual = new Telefono(res.getInt("tel_codigo"), res.getString("tel_numero"), res.getString("tel_tipo"),
 						res.getString("tel_operadora"));
-		
+
 			}
-			
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
+
 		con.close();
 		return telactual;
-		
-		
 	}
-	
+
 
 	public boolean actualizar(Telefono telefono,int codigo) {
 		System.out.println("entraactualiza"+telefono.getCodigo());
 		Persona usuarioactual = Persona.getInstance();
-		
+
 		codigo=telefono.getCodigo();
 		boolean rpta = false;
 		PreparedStatement ps = null;
 		try {
-			
+
 			con = ConexionBD.getConnection();
 			String sql = "UPDATE Telefono SET tel_codigo=?,tel_numero=?,tel_tipo=?, tel_operadora=?  WHERE tel_codigo="+ codigo+";"; 
 			ps = con.prepareStatement(sql);
@@ -157,12 +154,12 @@ public class TelefonoDAO {
 			rpta = ps.executeUpdate() > 0;
 			ps.close();
 			con.close();
-		
+
 		} catch (Exception e) {
 			e.printStackTrace();
-			}
+		}
 		return rpta;
-		
+
 	} 
 
 	public boolean actualizar1(Telefono telefono) throws SQLException {
@@ -180,6 +177,96 @@ public class TelefonoDAO {
 		return rowActualizar;
 	}
 
+
+
+	public ArrayList<Telefono> Busca(int codigo){
+		ArrayList<Telefono> telefonos= new ArrayList<Telefono>();  
+		try {
+
+			con = ConexionBD.getConnection();
+			PreparedStatement ps= con.prepareStatement("SELECT tel_codigo,tel_tipo,tel_numero,tel_operadora FROM telefono WHERE tel_codigo = '" + codigo + "'"    );	
+			ResultSet resultado =ps.executeQuery();
+			//ResultSet resultado = conexion.consultar("SELECT tel_codigo,tel_tipo,tel_numero,tel_operadora FROM telefono "  );
+
+			while (resultado.next()) { 
+				Telefono telefonoac = new Telefono();
+				int codigo1 = resultado.getInt("tel_codigo");
+				String tipo = resultado.getString("tel_tipo");
+				String numero=resultado.getString("tel_numero");
+				String operadora = resultado.getString("tel_operadora");	
+				telefonoac.setCodigo(codigo);
+				telefonoac.setTipo(tipo);
+				telefonoac.setNumero(numero);
+				telefonoac.setOperadora(operadora);
+				telefonos.add(telefonoac);
+			}
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+
+		}
+		return telefonos;
+
+	}
+
+
+
+
+
+	public ArrayList<Telefono> BuscaTel(String cedula){
+		ArrayList<Telefono> telefonos= new ArrayList<Telefono>();  
+		try {
+
+			con = ConexionBD.getConnection();
+			PreparedStatement ps= con.prepareStatement("SELECT tel_numero,tel_tipo,tel_operadora FROM telefono WHERE usu_cedula = '" + cedula + "'"    );	
+			ResultSet resultado =ps.executeQuery();
+			//ResultSet resultado = conexion.consultar("SELECT tel_codigo,tel_tipo,tel_numero,tel_operadora FROM telefono "  );
+			while (resultado.next()) { 
+				Telefono telefonoac = new Telefono();	
+				String tipo = resultado.getString("tel_tipo");
+				String numero=resultado.getString("tel_numero");
+				String operadora = resultado.getString("tel_operadora");	
+				telefonoac.setTipo(tipo);
+				telefonoac.setNumero(numero);
+				telefonoac.setOperadora(operadora);
+				telefonos.add(telefonoac);
+			}
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+
+		}
+		return telefonos;
+	}
+
+	public ArrayList<Persona> BuscaUsu(String cedula){
+		ArrayList<Persona> personas= new ArrayList<Persona>();  
+		try {
+
+			con = ConexionBD.getConnection();
+			PreparedStatement ps= con.prepareStatement("SELECT usu_nombre,usu_apellido FROM Usuario WHERE usu_cedula = '" + cedula + "'"    );	
+			ResultSet resultado =ps.executeQuery();
+			//ResultSet resultado = conexion.consultar("SELECT tel_codigo,tel_tipo,tel_numero,tel_operadora FROM telefono "  );
+			while (resultado.next()) { 
+				Persona persona = new Persona();	
+				String nombre = resultado.getString("usu_nombre");
+				String apellido=resultado.getString("usu_apellido");
+				persona.setNombre(nombre);
+				persona.setApellido(apellido);
+				
+				personas.add(persona);
+			}
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+
+		}
+		return personas;
+	}
+	
+	
+	
+	
 }
 
 
