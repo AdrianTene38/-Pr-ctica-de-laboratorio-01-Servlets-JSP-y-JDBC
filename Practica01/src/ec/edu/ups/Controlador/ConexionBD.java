@@ -49,6 +49,6 @@ public class ConexionBD {
 
 	public Connection getJdbcConnection() {
 		return jdbcConnection;
-	}  
-
+	}
+	
 }

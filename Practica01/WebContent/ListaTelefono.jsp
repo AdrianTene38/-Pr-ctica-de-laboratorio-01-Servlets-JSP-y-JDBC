@@ -27,19 +27,13 @@
 				<td><c:out value="${telefono.numero}" /></td>
 				<td><c:out value="${telefono.tipo}" /></td>
 				<td><c:out value="${telefono.operadora}" /></td>
-				<td><a href="adminArticulo?action=showedit&id=<c:out value="${telefono.codigo}" />">Editar</a></td>
-				<td><a href="adminArticulo?action=eliminar&id=<c:out value="${telefono.codigo}"/>">Eliminar</a> </td>	
+				<td><a href="ControlaTelefono?action=editapr&id=<c:out value="${telefono.codigo}" />">Editar</a></td>
+				<td><a href="ControlaTelefono?action=Eliminar&id=<c:out value="${telefono.codigo}" />">Eliminar</a> </td>	
 			</tr>
 		</c:forEach>
 	</table>
 	<br>
 
 	<table border="0" align="center">
-		<tr>
-		
-			<td><input type="submit" value="Agregar" name="agrega"></td>
-
-		
-		</tr>
 </body>
 </html>

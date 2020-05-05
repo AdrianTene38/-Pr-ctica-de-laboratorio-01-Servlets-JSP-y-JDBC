@@ -8,6 +8,7 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.sun.org.apache.xalan.internal.xsltc.compiler.sym;
 
 import ec.edu.ups.Controlador.ConexionBD;
 import ec.edu.ups.Modelo.Persona;
@@ -15,9 +16,13 @@ import ec.edu.ups.Modelo.Telefono;
 
 public class TelefonoDAO {
 	UsuarioDao usudao;
+	private PreparedStatement psentencia = null;
 	ConexionBD conexion;
 	Connection con = null;
+	//con es conexion	private Conexion con;
+	private Connection connection;
 
+	Telefono telefono;
 	public TelefonoDAO() {
 
 	}
@@ -56,7 +61,6 @@ public class TelefonoDAO {
 			//ResultSet resultado = conexion.consultar("SELECT tel_codigo,tel_tipo,tel_numero,tel_operadora FROM telefono "  );
 
 			while (resultado.next()) { 
-				System.out.println("aquimao");
 				Telefono telefonoac = new Telefono();
 				int codigo = resultado.getInt("tel_codigo");
 				String tipo = resultado.getString("tel_tipo");
@@ -81,16 +85,106 @@ public class TelefonoDAO {
 
 
 
-public boolean eliminar(Telefono telefono) throws SQLException {
-	boolean rowEliminar = false;
-	con = ConexionBD.getConnection();
-	PreparedStatement ps= con.prepareStatement("DELETE FROM articulos WHERE ID=?"   );	
-	rowEliminar = ps.executeUpdate() > 0;
-	con.close();
-	return rowEliminar;
-}
+	public void eliminar(int numero) throws Exception{
+		System.out.println("PREVIAAAA");	
+
+		PreparedStatement ps = null;
+		telefono=Telefono.getInstance();
+		try {
+			if (numero!= 0) {
+				numero=telefono.getCodigo();
+				System.out.println("LLEGA A ELIMINAR"+numero);
+				con = 	ConexionBD.getConnection();
+				String sql = "DELETE FROM Telefono WHERE tel_codigo="+ numero +";";
+				ps = con.prepareStatement(sql);;
+				ps.executeUpdate();
+
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				ps.close();
+				con.close();
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
+
+	} 
+	public Telefono obtenerPorId(int id) throws SQLException  {
+		Telefono telactual = new Telefono();
+		System.out.println("ven por qui por favor");
+		try {
+			con = ConexionBD.getConnection();
+			
+			PreparedStatement ps= con.prepareStatement("SELECT tel_codigo,tel_numero,tel_tipo,tel_operadora FROM telefono WHERE tel_codigo = '"  + id + "'"   );	
+			ResultSet res =ps.executeQuery();
+			if (res.next()) {
+				telactual = new Telefono(res.getInt("tel_codigo"), res.getString("tel_numero"), res.getString("tel_tipo"),
+						res.getString("tel_operadora"));
+		
+			}
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		con.close();
+		return telactual;
+		
+		
+	}
+	
+
+	public boolean actualizar(Telefono telefono,int codigo) {
+		System.out.println("entraactualiza"+telefono.getCodigo());
+		Persona usuarioactual = Persona.getInstance();
+		
+		codigo=telefono.getCodigo();
+		boolean rpta = false;
+		PreparedStatement ps = null;
+		try {
+			
+			con = ConexionBD.getConnection();
+			String sql = "UPDATE Telefono SET tel_codigo=?,tel_numero=?,tel_tipo=?, tel_operadora=?  WHERE tel_codigo="+ codigo+";"; 
+			ps = con.prepareStatement(sql);
+			ps.setInt(1,telefono.getCodigo());
+			ps.setString(2,telefono.getNumero());
+			ps.setString(3,telefono.getTipo());
+			ps.setString(4,telefono.getOperadora());
+			rpta = ps.executeUpdate() > 0;
+			ps.close();
+			con.close();
+		
+		} catch (Exception e) {
+			e.printStackTrace();
+			}
+		return rpta;
+		
+	} 
+
+	public boolean actualizar1(Telefono telefono) throws SQLException {
+		boolean rowActualizar = false;
+		con = ConexionBD.getConnection();
+		String sql = "UPDATE Telefono SET tel_codigo=?,tel_numero=?,tel_tipo=?, tel_operadora=? WHERE tel_codigo=?;";
+		PreparedStatement statement = connection.prepareStatement(sql);
+		statement.setInt(1, telefono.getCodigo());
+		statement.setString(2, telefono.getNumero());
+		statement.setString(3, telefono.getTipo());
+		statement.setString(4, telefono.getOperadora());		
+		rowActualizar = statement.executeUpdate() > 0;
+		statement.close();
+		con.close();
+		return rowActualizar;
+	}
 
 }
+
+
+
+
 
 
 

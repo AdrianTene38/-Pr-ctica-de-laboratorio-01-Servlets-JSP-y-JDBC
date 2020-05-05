@@ -11,7 +11,7 @@
 	<form action="ControlaUsuario?action=Registrarse" method="post">
 		<table border="1" align="center">
 		<tr>
-			<td>Cédula:</a>]</td>		
+			<td>Cédula:</a></td>		
 			<td><input type="text" name="cedula"/></td>	
 		</tr>
 		<tr>
