@@ -1,44 +1,179 @@
 <!DOCTYPE html>
-		<html>
-		<head>
-		    <title>sistema de login</title>
-		    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-			<!-- vinculo a bootstrap -->
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+<html>
+<head>
+<title>sistema de login</title>
+<meta name="viewport"
+	content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+<!-- vinculo a bootstrap -->
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
+	integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
+	crossorigin="anonymous">
 <!-- Temas-->
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
-<!-- se vincula al hoja de e
-stilo para definir el aspecto del formulario de login-\->  
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css"
+	integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp"
+	crossorigin="anonymous">
+<!-- se vincula al hoja de estilo para definir el aspecto del formulario de login-->
 <link rel="stylesheet" type="text/css" href="estilo.css">
-		</head>
-		<body>
-		 <div class="Icon">
-                    <!--Icono de usuario-->
-                   <span class="glyphicon glyphicon-user"></span>
-                 </div>
-<div class="ContentForm">
-		 	<form action="ControlaUsuario?action=Login" method="post"  >
-		 		<div class="input-group input-group-lg">
-				  <span class="input-group-addon" id="sizing-addon1"><i class="glyphicon glyphicon-envelope"></i></span>
-				  <input type="text"  name="correo"   >
+
+<style>
+/*
+Al cuerpo de la
+pagina se aplica el tamaño de fuente
+ */
+body {
+	font-size: 12px;
+}
+/**
+ * se aplica el ancho, margen centrado
+ * borde de un pixel con redondeado, y rellenado
+ * a la izquierda y derecha
+ */
+#Contenedor {
+	width: 400px;
+	margin: 50px auto;
+	background-color: #F3EDED;
+	border: 1px solid #ECE8E8;
+	height: 400px;
+	border-radius: 8px;
+	padding: 0px 9px 0px 9px;
+}
+
+/**
+ * Aplicando al icono de usuario el color de fondo,
+ * rellenado de 20px y un redondeado de 120px en forma
+ * de un circulo
+ */
+.Icon span {
+	background: #A8A6A6;
+	padding: 20px;
+	border-radius: 120px;
+}
+/**
+ * Se aplica al contenedor madre un margen de tamaño 10px hacia la cabecera y pie,
+ * color de fuente blanco,un tamaño de fuente 50px y texto centrado.
+ */
+.Icon {
+	margin-top: 10px;
+	margin-bottom: 10px;
+	color: #FFF;
+	font-size: 50px;
+	text-align: center;
+}
+/**
+ * Se aplica al contenedor donde muestra en el pie
+ * la opción de olvidaste tu contraseña?
+ */
+.opcioncontra {
+	text-align: center;
+	margin-top: 20px;
+	font-size: 14px;
+}
+
+/**
+ * En las siguientes lineas
+ * se define el diseño adaptable, para que
+ * se muestre en los dispositivos móviles
+ */
+.menuCSS3 ul {
+	display: flex;
+	padding: 0;
+	margin: 0;
+	list-style: none;
+}
+
+.menuCSS3 a {
+	display: block;
+	padding: 2em;
+	background-color: #F9B53C;
+	text-decoration: none;
+	color: #191C26;
+}
+
+.menuCSS3 a:hover {
+	background-color: #CC673B;
+}
+
+.menuCSS3 ul li ul {
+	display: none;
+}
+
+.menuCSS3 ul li a:hover+ul, .menuCSS3 ul li ul:hover {
+	display: block;
+}
+</style>
+</head>
+
+<body>
+	<div>
+
+		<nav class="menuCSS3">
+			<ul>
+				<li><a href="#">Inicio</a></li>
+				<li><a href="#">Empleados</a>
+					<ul>
+						<li><a href="#">Juan</a></li>
+						<li><a href="#">Paco</a></li>
+						<li><a href="#">Ramón</a></li>
+						<li><a href="#">María</a></li>
+					</ul></li>
+				<li><a href="#">FAQ</a></li>
+				<li><a href="#">Contacto</a>
+					<ul>
+						<li><a href="#">Email</a></li>
+						<li><a href="#">Mapa</a></li>
+					</ul></li>
+			</ul>
+		</nav>
+	</div>
+
+	<div id="Contenedor">
+
+
+		<div class="Icon">
+			<!--Icono de usuario-->
+			<span class="glyphicon glyphicon-user"></span>
+		</div>
+		<div class="ContentForm">
+
+			<form action="ControlaUsuario?action=Login " method="post"
+				name="FormEntrar">
+				<div class="input-group input-group-lg">
+					<span class="input-group-addon" id="sizing-addon1"><i
+						class="glyphicon glyphicon-envelope"></i></span> <input type="email"
+						class="form-control" name="correo" placeholder="Correo"
+						id="Correo" aria-describedby="sizing-addon1" required>
 				</div>
 				<br>
 				<div class="input-group input-group-lg">
-				  <span class="input-group-addon" id="sizing-addon1"><i class="glyphicon glyphicon-lock"></i></span>
-				  <input type="password" name="contra">
+					<span class="input-group-addon" id="sizing-addon1"><i
+						class="glyphicon glyphicon-lock"></i></span> <input type="password"
+						name="contra" class="form-control" placeholder="******"
+						aria-describedby="sizing-addon1" required>
 				</div>
 				<br>
-				<button class="btn btn-lg btn-primary btn-block btn-signin" id="IngresoLog" type="submit">Entrar</button>			
-		 	</form>
-		 	<form action="Registrarse.jsp" method="get">
-		 <button class="btn btn-lg btn-primary btn-block btn-signin" id="IngresoLog" type="submit">Registrarse</button>
-				<div class="opcioncontra"><a href="">Olvidaste tu contraseña?</a></div>	
+				<button class="btn btn-lg btn-primary btn-block btn-signin"
+					id="IngresoLog" type="submit">Entrar</button>
+
+
+			</form>
+		</div>
+		<form action="Registrarse.jsp" method="get">
+			<button class="btn btn-lg btn-primary btn-block btn-signin"
+				id="IngresoLog" type="submit">Registrarse</button>
+
 		</form>
-		 </div>	
-		 </div>
+
+	</div>
+
 </body>
- <!-- vinculando a libreria Jquery-->
- <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
- <!-- Libreria java scritp de bootstrap -->
- <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+<!-- vinculando a libreria Jquery-->
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+<!-- Libreria java scritp de bootstrap -->
+<script
+	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"
+	integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
+	crossorigin="anonymous"></script>
 </html>
